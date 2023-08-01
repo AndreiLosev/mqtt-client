@@ -1,0 +1,24 @@
+{
+    "name": "losev/mqtt-client",
+    "autoload": {
+        "psr-4": {
+            "Losev\\MqttClient\\": "src/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Losev Andrei",
+            "email": "loseu.andrei.g@gmail.com"
+        }
+    ],
+    "scripts": {
+        "test": "vendor/bin/phpunit --colors"
+    },
+    "require-dev": {
+        "psalm/phar": "^5.14",
+        "phpunit/phpunit": "^10.2"
+    }
+}
