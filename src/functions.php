@@ -23,7 +23,7 @@ function strDecode(string $bytes): array
 
     while ($bytes !== '') {
         /** @var int */
-        $len = current(unpack('n*', substr($bytes, 0, 2)));
+        $len = current(unpack('n', substr($bytes, 0, 2)));
         $result[] = substr($bytes, 2, $len);
         $bytes = substr($bytes, 2 + $len);
     }
@@ -70,9 +70,30 @@ function getLen(string &$bytes): int
     }
 }
 
-function dbg(string $message): void
+/** 
+ * @param string[] $messages 
+ */
+function dbg(...$messages): void
 {
-    $arr = unpack('C*', $message);
-    $harr = array_map(fn(int $v) => sprintf('\\x%02X', $v), $arr);
-    print_r(implode(' ', $harr) . PHP_EOL);
+    $result = [];
+
+    /** @var string $m */
+    foreach ($messages as $m) {
+        $arr = unpack('C*', $m);
+        if (!$arr) {
+            continue;
+        }
+        /** @var int $v */
+        foreach ($arr as $key => $v) {
+            $result[$key][] = sprintf('\\x%02X', $v);
+        }
+    }
+
+    foreach ($result as $value) {
+        if (count($value) === 1) {
+            echo $value[0] . ' ';
+        } else {
+            echo implode(" - ", $value) . PHP_EOL;
+        }
+    }
 }
