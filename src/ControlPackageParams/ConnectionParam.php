@@ -1,6 +1,6 @@
 <?php
 
-namespace Losev\MqttClient;
+namespace Losev\MqttClient\ControlPackageParams;
 
 class ConnectionParam
 {

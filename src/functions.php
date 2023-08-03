@@ -71,6 +71,28 @@ function getLen(string &$bytes): int
 }
 
 /** 
+ * @param callable(int): string $read
+ */
+function getPackageSize(callable $read): int
+{
+    /** @var int */
+    $result = 0;
+    $factor = 1;
+
+    while (true) { 
+        $encodedByte = ord($read(1)); 
+        $result += ($encodedByte & 0x7f) * $factor;
+        $factor <<= 7;
+        if (!($encodedByte & 0x80)) {
+            return $result;
+        }
+        if ($factor > 0x200000) {
+            throw new \RuntimeException("Invalid Remaining bytes");
+        }
+    }
+}
+
+/** 
  * @param string[] $messages 
  */
 function dbg(...$messages): void

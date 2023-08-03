@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use Losev\MqttClient\ConnectionParam;
+use Losev\MqttClient\ControlPackageParams\ConnectionParam;
 use Losev\MqttClient\PackageBuilder;
 use PHPUnit\Framework\TestCase;
 
@@ -21,7 +21,7 @@ class PackageTest extends TestCase
         );
 
         $builder = new PackageBuilder();
-        $a = $builder->connectionPackage($cP);
+        $a = $builder->connect->build($cP);
         $b = "\x10\x2f\x00\x04\x4D\x51\x54\x54\x04\xce\x00\x0a\x00\x04\x31\x32\x35\x38\x00\x0A\x74\x65\x73\x74\x2F\x62\x79\x2F\x62\x79\x00\x05\x62\x79\x20\x62\x79\x00\x04\x57\x61\x73\x61\x00\x04\x31\x32\x33\x34";
 
         $this->assertSame($a, $b);
