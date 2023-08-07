@@ -8,5 +8,7 @@ class PublishParams
         public int $QoS = 0,
         public bool $isRetain = false,
         public bool $isDup = false,
+        public string $theme,
+        public string $payload,
     ) {}
 }

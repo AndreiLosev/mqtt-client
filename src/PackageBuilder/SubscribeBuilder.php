@@ -25,13 +25,13 @@ class SubscribeBuilder
      */
     private static function payload(array $payload): string
     {
-        $result = [];
+        $result = '';
 
         for ($i = 0; $i  < count($payload); $i++) { 
-            $message = strEndcode($payload[$i]->theem) . chr($payload[$i]->QoS);
-            $result[] = $message;
+            $message = strEndcode($payload[$i]->theme) . chr($payload[$i]->QoS);
+            $result .= $message;
         }
 
-        return implode('', $result);
+        return $result;
     }
 }

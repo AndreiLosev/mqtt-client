@@ -28,27 +28,21 @@ class ConnectionBuilder
             (int)$cp->cleaningFlag * 0x02,
         ];
 
-        $result = [
-            "\x00\x04MQTT",
-            $cp->version,
-            chr(array_sum($connectFlags)),
-            pack('n', $cp->pingPeriodSec),
-        ];
-        
-        return implode('', $result);
+        return "\x00\x04MQTT"
+            . $cp->version
+            . chr(array_sum($connectFlags))
+            . pack('n', $cp->keepAliveInterval);
     }
 
     private static function pyload(ConnectionParam $cp): string
     {
-        $result = [
-            strEndcode($cp->clientId),
-            is_null($cp->lastWill) || is_null($cp->lastWillTheem)
-                ? '' : strEndcode($cp->lastWillTheem),
-            is_null($cp->lastWill) ? '' : strEndcode($cp->lastWill),
-            is_null($cp->name) ? '' : strEndcode($cp->name),
-            is_null($cp->password) ? '' : strEndcode($cp->password),
-        ];
+        $lastWillTheem = is_null($cp->lastWill) || is_null($cp->lastWillTheem)
+                ? '' : strEndcode($cp->lastWillTheem);
 
-        return implode('', $result);
+        return strEndcode($cp->clientId)
+            . $lastWillTheem
+            . (is_null($cp->lastWill) ? '' : strEndcode($cp->lastWill))
+            . (is_null($cp->name) ? '' : strEndcode($cp->name))
+            . (is_null($cp->password) ? '' : strEndcode($cp->password));
     }
 }

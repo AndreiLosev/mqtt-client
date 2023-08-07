@@ -2,8 +2,6 @@
 
 namespace Losev\MqttClient;
 
-use Losev\MqttClient\ControlPackageParams\PublishParams;
-
 enum PackageType
 {
     case CONNECT;

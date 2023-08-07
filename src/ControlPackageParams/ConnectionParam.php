@@ -15,7 +15,7 @@ class ConnectionParam
         public null|string $lastWill = null,
         public null|string $lastWillTheem = null,
         public bool $cleaningFlag = true,
-        public int $pingPeriodSec = 300,
+        public int $keepAliveInterval = 300,
         public string $version = self::V3_1_1,
     )
     {

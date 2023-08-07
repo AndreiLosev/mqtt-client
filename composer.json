@@ -20,5 +20,8 @@
     "require-dev": {
         "psalm/phar": "^5.14",
         "phpunit/phpunit": "^10.2"
+    },
+    "require": {
+        "amphp/socket": "^2.1"
     }
 }
